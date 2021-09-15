@@ -1,0 +1,49 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+	<title>Specialization</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<style>
+		.row {
+			padding: 3px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header bg-info text-center">
+				<h3>Specialization</h3>
+			</div>
+			<div class="card-body">
+				<table class="table text-center">
+					<tr>
+						<th>Id</th>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Note</th>
+						<th>operations</th>
+					</tr>
+					<tr th:each="ob:${list}">
+						<td th:text=${ob.id}></td>
+						<td th:text=${ob.code}></td>
+						<td th:text=${ob.name}></td>
+						<td th:text=${ob.note}></td>
+						<td><a th:href="@{/specialization/delete(id=${ob.id})}" class="btn btn-danger">DELETE</a>|
+							<a th:href="@{/specialization/edit(id=${ob.id})}" class="btn btn-primary">EDIT</a>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="card-footer">
+				<div th:text=${message}></div>
+			
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

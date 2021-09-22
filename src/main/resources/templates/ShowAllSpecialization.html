@@ -5,6 +5,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+	
 	<style>
 		.row {
 			padding: 3px;
@@ -19,6 +21,7 @@
 				<h3>Specialization</h3>
 			</div>
 			<div class="card-body">
+			<a th:href="@{/specialization/excel}" class="btn btn-success">Excel <i class="fa fa-file-excel-o" aria-hidden="true"></i></a>
 				<table class="table text-center">
 					<tr>
 						<th>Id</th>

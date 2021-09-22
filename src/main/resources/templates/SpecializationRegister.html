@@ -1,146 +1,206 @@
 <html xmlns:th="https://www.thymeleaf.org/">
-  <head>
-    <title>Specialization</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <style>
-      .row {
-        padding: 3px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <div class="card">
-        <div class="card-header bg-info text-center">
-          <h3>Specialization</h3>
-        </div>
-        <div class="card-body">
-          <form action="save" id="SpecializationForm" method="post">
-            <div class="row">
-              <div class="col-2">
-                <label for="code"> Code:</label>
-              </div>
-              <div class="col-4">
-                <input type="text" name="code" id="code" class="form-control" />
-              </div>
-              <div class="col-6"><span id="codeError"></span></div>
-            </div>
-            <div class="row">
-              <div class="col-2"><label for="name">Name : </label></div>
-              <div class="col-4">
-                <input type="text" name="name" id="name" class="form-control" />
-              </div>
-              <div class="col-6"><span id="nameError"></span></div>
-            </div>
-            <div class="row">
-              <div class="col-2"><label for="note">Note : </label></div>
-              <div class="col-4">
-                <input type="text" name="note" id="note" class="form-control" />
-              </div>
-              <div class="col-6"><span id="noteError"></span></div>
-            </div>
-            <button type="submit" class="btn btn-success">CREATE</button>
-          </form>
-        </div>
-        <div class="card-footer">
-        	<div th:text="${message}"></div>
-        </div>
-      </div>
-    </div>
-    <script>
-      $(document).ready(function () {
-        $("#codeError").hide();
-        $("#nameError").hide();
-        $("#noteError").hide();
 
-        var codeError = false;
-        var nameError = false;
-        var noteError = false;
+<head>
+	<title>Specialization</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<style>
+		.row {
+			padding: 3px;
+		}
+	</style>
+</head>
 
-        function validate_code() {
-            var codeVal = $("#code").val();
-            if(codeVal === ''){
-                $("#codeError").show();
-                $("#codeError").html("please enter code");
-                $("#codeError").css("color","red");
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header bg-info text-center">
+				<h3>Specialization</h3>
+			</div>
+			<div class="card-body">
+				<form action="save" id="SpecializationForm" method="post">
+					<div class="row">
+						<div class="col-2">
+							<label for="code"> Code:</label>
+						</div>
+						<div class="col-4">
+							<input type="text" name="code" id="code" class="form-control" />
+						</div>
+						<div class="col-6"><span id="codeError"></span></div>
+					</div>
+					<div class="row">
+						<div class="col-2"><label for="name">Name : </label></div>
+						<div class="col-4">
+							<input type="text" name="name" id="name" class="form-control" />
+						</div>
+						<div class="col-6"><span id="nameError"></span></div>
+					</div>
+					<div class="row">
+						<div class="col-2"><label for="note">Note : </label></div>
+						<div class="col-4">
+							<input type="text" name="note" id="note" class="form-control" />
+						</div>
+						<div class="col-6"><span id="noteError"></span></div>
+					</div>
+					<button type="submit" class="btn btn-success">CREATE</button>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div th:text="${message}"></div>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(document).ready(function () {
+			$("#codeError").hide();
+			$("#nameError").hide();
+			$("#noteError").hide();
 
-                return codeError =false;
-            }
-            else{
-                return codeError = true;
-            }
-
-          return codeError;
-        }
-
-        function validate_name() {
-            var nameVal = $("#name").val();
-            if(nameVal === ''){
-                $("#nameError").show();
-                $("#nameError").html("please enter name");
-                $("#nameError").css("color","red");
-
-                return nameError =false;
-            }
-            else{
-                return nameError = true;
-            }
-
-          return nameError;
-        }
-
-        function validate_note() {
-
-            var noteVal = $("#note").val();
-            if(noteVal === ''){
-                
-                $("#noteError").show();
-                $("#noteError").html("please enter note");
-                $("#noteError").css("color","red");
-
-                return noteError =false;
-            }
-            else{
-                return noteError = true;
-            }
-          return noteError;
-        }
+			var codeError = false;
+			var nameError = false;
+			var noteError = false;
 
 
-        $("#code").keyup(function(){
-            validate_code();
-        });
+			function validate_code() {
+				$("#code").val($("#code").val().toUpperCase());
+				var codeVal = $("#code").val();
+				var expression = /^[A-Z]{4,10}$/;
 
-        $("#name").keyup(function(){
-            validate_name();
-        });
+				if (codeVal === '') {
+					$("#codeError").show();
+					$("#codeError").html("please enter code");
+					$("#codeError").css("color", "red");
 
-        $("#note").keyup(function(){
-            validate_note();
-        });
+					return codeError = false;
+				} else if (!expression.test(codeVal)) {
+					$("#codeError").show();
+					$("#codeError").html("code must be 4-10 chars only");
+					$("#codeError").css("color", "red");
+				}
+				else {
+					$.ajax({
+						url: "checkCode",
+						data: {"specCode": codeVal},
+						success: function (message) {
+							if (message != '') {
+								$("#codeError").show();
+								$("#codeError").html("code already exist");
+								$("#codeError").css("color", "red");
+							} else {
+								$("#codeError").hide();
+								return codeError = true;
+							}
+						}
+					});
 
-        $("#SpecializationForm").submit(function(){
-            validate_code();
-            validate_name();
-            validate_note();
-
-            if(codeError&& nameError && noteError){
-                return true;
-            }else{
-                return false;
-            }
-            return false;
-            
-        });
+				}
 
 
 
-      });
-    </script>
-  </body>
+				return codeError;
+			}
+
+			function validate_name() {
+				var nameVal = $("#name").val();
+				var expression = /^[A-Za-z0-9\s\.]{4,60}$/;
+				if (nameVal === '') {
+					$("#nameError").show();
+					$("#nameError").html("please enter name");
+					$("#nameError").css("color", "red");
+
+					return nameError = false;
+				} else if (!expression.test(nameVal)) {
+					$("#nameError").show();
+					$("#nameError").html("name must be 4-60 chars");
+					$("#nameError").css("color", "red");
+
+					return nameError = false;
+				}
+				else {
+					$.ajax({
+						url: "checkName",
+						data: {"specName": nameVal},
+						success: function (message) {
+							if (message != '') {
+								$("#nameError").show();
+								$("#nameError").html(message);
+								$("#nameError").css("color", "red");
+							} else {
+								$("#nameError").hide();
+								return nameError = true;
+							}
+						}
+
+
+					});
+
+
+
+				}
+
+				return nameError;
+			}
+
+			function validate_note() {
+
+				var noteVal = $("#note").val();
+
+				var expression = /^[A-Za-z0-9\s\.\,\-\']{10,250}$/;
+
+
+				if (noteVal === '') {
+
+					$("#noteError").show();
+					$("#noteError").html("please enter note");
+					$("#noteError").css("color", "red");
+
+					return noteError = false;
+				} else if (!expression.test(noteVal)) {
+					$("#noteError").show();
+					$("#noteError").html("*<b>Note</b> can have 10 to 150 chars[A-Za-z0-9.,-(space)]");
+					$("#noteError").css("color", "red");
+
+					return noteError = false;
+				}
+				else {
+					$("#noteError").hide();
+					return noteError = true;
+				}
+				return noteError;
+			}
+
+
+			$("#code").keyup(function () {
+				validate_code();
+			});
+
+			$("#name").keyup(function () {
+				validate_name();
+			});
+
+			$("#note").keyup(function () {
+				validate_note();
+			});
+
+			$("#SpecializationForm").submit(function () {
+				validate_code();
+				validate_name();
+				validate_note();
+
+				if (codeError && nameError && noteError) {
+					return true;
+				} else {
+					return false;
+				}
+				return false;
+
+			});
+
+
+
+		});
+	</script>
+</body>
+
 </html>

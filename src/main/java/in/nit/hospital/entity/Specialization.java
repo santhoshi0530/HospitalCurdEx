@@ -17,10 +17,24 @@ public class Specialization {
 	@GeneratedValue
 	@Column(name="spec_id")
 	private Integer id ;
-	@Column(name="spec_code")
+	
+	@Column(
+			name="spec_code",
+			length = 10,
+			nullable = false,
+			unique = true)
 	private String code;
-	@Column(name="spec_name")
+	
+	@Column(
+			name="spec_name",
+			length=60,
+			nullable = false,
+			unique = true)
 	private String name;
-	@Column(name="spec_note")
+	
+	@Column(
+			name="spec_note",
+			length=250,
+			nullable=false)
 	private String note;
 }

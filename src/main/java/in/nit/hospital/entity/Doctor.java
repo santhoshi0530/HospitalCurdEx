@@ -43,6 +43,9 @@ public class Doctor {
 
 	@Column(name = "doc_note_col")
 	private String note;
+	
+	@Column(name="doc_photo_col")
+	private String photoLoc;
 
 	@ManyToOne
 	@JoinColumn(name = "spec_id_fl_col")

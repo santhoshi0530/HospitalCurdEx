@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <title>Patient Registration</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+      .row {
+        padding: 3px;
+      }
+    </style>
+  </head>
+  <body>
+      <div class="container">
+          <div class="card">
+              <div class="card-header">
+                Patients List
+              </div>
+              <div class="card-body">
+                  <table class="table">
+                      <tr>
+                          <th>Id</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Mobile</th>
+                          <th>Date Of Birth</th>
+                          <th>Medical History</th>
+                          <th>Gender</th>
+                          <th>Operatins</th>
+                      </tr>
+                      <tr th:each="ob:${patients}">
+                          <td th:text="${ob.id}"></td>
+                          <td th:text="${ob.firstName}+' '+${ob.lastName}"></td>
+                          <td th:text="${ob.email}"></td>
+                          <td th:text="${ob.mobile}"></td>
+                          <td th:text="${ob.dob}"></td>
+                          <td >[[${ob.mediHistory +"-"+ ob.ifOther}]]</td>
+                          <td th:text="${ob.gender}"></td>
+                          <td>
+                          <a th:href="@{/patient/delete(id=${ob.id})}" class="btn btn-danger">DELETE</a>
+                          <a th:href="@{/patient/edit(id=${ob.id})}" class="btn btn-primary">EDIT</a></td>
+                      </tr>
+                  </table>
+              </div>
+              <div class="card-footer">
+              <div th:text="${message}"></div></div>
+          </div>
+      </div>
+  </body>
+</html>

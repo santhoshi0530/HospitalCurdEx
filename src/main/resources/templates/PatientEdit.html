@@ -1,0 +1,215 @@
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+	<title>Patient Registration</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<style>
+		.row {
+			padding: 3px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="card">
+			<div class="card-header">
+				<h4>Patient Edit</h4>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/patient/update}" id="doctorRegisterForm" method="POST" th:object="${patient}">
+	
+					<!--row 1-->
+					<div class="row">
+						<div class="col-2">
+							<label for="id">Id :</label>
+						</div>
+						<div class="col-4">
+							<input type="text" th:field="*{id}" id="id"  readonly class="form-control" />
+						</div>
+						<div class="col-6">
+							<span id="idError"></span>
+						</div>
+					</div>
+
+					<!--row 1-->
+					<div class="row">
+						<div class="col-2">
+							<label for="firstName">Name :</label>
+						</div>
+						<div class="col-4">
+							<input type="text" th:field="*{firstName}" id="firstName" class="form-control" />
+						</div>
+						<div class="col-6">
+							<span id="firstNameError"></span>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-2"><label for="lastName">LastName :</label></div>
+						<div class="col-4">
+							<input type="text" th:field="*{lastName}" id="lastName" class="form-control" />
+						</div>
+						<div class="col-6">
+							<span id="lastNameError"></span>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-2"><label for="email">Email :</label></div>
+						<div class="col-4">
+							<input type="text" th:field="*{email}" id="email" class="form-control" />
+						</div>
+						<div class="col-6">
+							<span id="emailError"></span>
+						</div>
+					</div>
+					<!-- row 3-->
+					<div class="row">
+						<div class="col-2">
+							<label for="gender"> Gender :</label>
+						</div>
+						<div class="col-4">
+							<input type="radio" th:field="*{gender}" value="male" />
+							Male
+							<input type="radio" th:field="*{gender}" value="female" />
+							Female
+						</div>
+						<div class="col-6">
+							<span id="genderError"></span>
+						</div>
+					</div>
+
+					<!--row 4-->
+					<div class="row">
+						<div class="col-2">
+							<label for="mobile"> Phone :</label>
+						</div>
+						<div class="col-4">
+							<input type="number" th:field="*{mobile}" id="mobile" class="form-control" />
+						</div>
+						<div class="col-6">
+							<span id="mobileError"></span>
+						</div>
+					</div>
+
+					<!--row 5-->
+					<div class="row">
+						<div class="col-2">
+							<label for="dob"> Date of Birth :</label>
+						</div>
+						<div class="col-4">
+							<input type="date" th:field="*{dob}" id="dob" class="form-control" />
+						</div>
+						<div class="col-6">
+							<span id="dobError"></span>
+						</div>
+					</div>
+
+					<!--row 6-->
+					<div class="row">
+						<div class="col-2">
+							<label for="maritalStatus"> Marital Status :</label>
+						</div>
+						<div class="col-4">
+							<input type="radio" th:field="*{maritalStatus}" id="maritalStatus1" class="form-radio"
+								value="M" />Married
+							<input type="radio" th:field="*{maritalStatus}" id="maritalStatus2" class="form-radio"
+								value="UnM" />UnMarried
+							<input type="radio" th:field="*{maritalStatus}" id="maritalStatus3" class="form-radio"
+								value="D" />Divorced
+							<input type="radio" th:field="*{maritalStatus}" id="maritalStatus4" class="form-radio"
+								value="ls" />leggaly separated
+						</div>
+						<div class="col-6">
+							<span id="maritalStatusError"></span>
+						</div>
+					</div>
+					<!--row 7-->
+					<div class="row">
+						<div class="col-2">
+							<label for="presentAddrs"> Present Address :</label>
+						</div>
+						<div class="col-4">
+							<textarea th:field="*{presentAddrs}" id="presentAddrs" class="form-control"></textarea>
+						</div>
+						<div class="col-6">
+							<span id="presentAddrsError"></span>
+						</div>
+					</div>
+
+					<!--row 7-->
+					<div class="row">
+						<div class="col-2">
+							<label for="communicationAddrs"> Communication Address :</label>
+						</div>
+						<div class="col-4">
+							<textarea th:field="*{communicationAddrs}" id="communicationAddrs"
+								class="form-control"></textarea>
+						</div>
+						<div class="col-6">
+							<span id="communicationAddrsError"></span>
+						</div>
+					</div>
+
+					<!--row 8-->
+					<div class="row">
+						<div class="col-2"> Past Medical History :</div>
+						<div class="col-4">
+							<input type="checkbox" th:field="*{mediHistory}" id="mediHistory1" value="Sugar"> Sugar
+							<input type="checkbox" th:field="*{mediHistory}" id="mediHistory2" value="BP"> BP
+							<input type="checkbox" th:field="*{mediHistory}" id="mediHistory3" value="Ulcer"> Ulcer
+							<input type="checkbox" th:field="*{mediHistory}" id="mediHistory4" value="Cancer"> Cancer
+							<input type="checkbox" th:field="*{mediHistory}" id="mediHistory5" value="Asthama"> Asthama
+							<input type="checkbox" th:field="*{mediHistory}" id="mediHistory6" value="ChickenPox">
+							ChickenPox
+
+						</div>
+						<div class="col-6">
+							<span id="mediHistoryError"></span>
+						</div>
+					</div>
+
+					<!-- row 9 -->
+					<div class="row">
+						<div class="col-2">
+							<label for="ifOther">IF Other History
+								<input type="checkbox" th:field="*{mediHistory}" id="mediHistory5" value="ifOther" />
+							</label>
+						</div>
+						<div class="col-4">
+							<input type="text" th:field="*{ifOther}" id="ifOther" class="form-control" />
+						</div>
+						<div class="col-6">
+							<span id="mediHistoryError"></span>
+						</div>
+					</div>
+					<!--row 10-->
+					<div class="row">
+						<div class="col-2">
+							<label for="note"> Other Details :</label>
+						</div>
+						<div class="col-4">
+							<textarea th:field="*{note}" id="note" class="form-control"></textarea>
+						</div>
+						<div class="col-6">
+							<span id="noteError"></span>
+						</div>
+					</div>
+
+
+
+
+					<button type="submit" class="btn btn-success">UPDATE</button>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div th:text="${message}"></div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
